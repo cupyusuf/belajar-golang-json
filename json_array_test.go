@@ -92,6 +92,28 @@ func TestJsonArrayComplex(t *testing.T) {
 	fmt.Println(string(jsonBytes))
 }
 
+func TestOnlyJsonArrayComplex(t *testing.T) {
+	addresses := []Address{
+		{
+			Street:     "Jl. Sudirman",
+			Country:    "Indonesia",
+			PostalCode: "12345",
+		},
+		{
+			Street:     "Jl. Budhi",
+			Country:    "Indonesia",
+			PostalCode: "64321",
+		},
+	}
+
+	jsonBytes, err := json.Marshal(addresses)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(string(jsonBytes))
+}
+
 func TestJsonArrayComplexDecode(t *testing.T) {
 	jsonString := `{"FirstName":"Yusuf","LastName":"Supriadi","Email":"yusuf@gmail.com","Age":25,"Married":false,"Hobbies":["Coding","Reading","Gaming"],"Addresses":[{"Street":"Jl. Sudirman","Country":"Indonesia","PostalCode":"12345"},{"Street":"Jl. Budhi","Country":"Indonesia","PostalCode":"64321"}]}`
 
@@ -112,4 +134,19 @@ func TestJsonArrayComplexDecode(t *testing.T) {
 	fmt.Println(customer.Married)
 	fmt.Println(customer.Hobbies)
 	fmt.Println(customer.Addresses)
+}
+
+func TestOnlyJsonArrayComplexDecode(t *testing.T) {
+	jsonString := `[{"Street":"Jl. Sudirman","Country":"Indonesia","PostalCode":"12345"},{"Street":"Jl. Budhi","Country":"Indonesia","PostalCode":"64321"}]`
+
+	jsonBytes := []byte(jsonString)
+
+	addresses := &[]Address{}
+
+	err := json.Unmarshal(jsonBytes, addresses)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(addresses)
 }
