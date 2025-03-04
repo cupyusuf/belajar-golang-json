@@ -6,6 +6,12 @@ import (
 	"testing"
 )
 
+type Address struct {
+	Street     string
+	Country    string
+	PostalCode string
+}
+
 type Customer struct {
 	FirstName string
 	LastName  string
@@ -13,6 +19,7 @@ type Customer struct {
 	Age       int
 	Married   bool
 	Hobbies   []string
+	Addresses []Address
 }
 
 func TestJsonObject(t *testing.T) {
